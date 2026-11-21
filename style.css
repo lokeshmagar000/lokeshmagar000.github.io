@@ -1,0 +1,66 @@
+/* :root holds "variables" — colours we reuse everywhere.
+   Change one here and the whole site changes. */
+:root {
+  --bg: #0f172a;        /* dark blue background */
+  --card: #1e293b;      /* box colour */
+  --text: #e2e8f0;      /* main text */
+  --muted: #94a3b8;     /* softer grey text */
+  --accent: #dc143c;    /* crimson red, like the Nepal flag */
+}
+
+/* * means "every element". box-sizing keeps sizes predictable. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* The top section */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem 2rem;
+}
+
+/* Round circle with your first letter */
+.avatar {
+  width: 96px; height: 96px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;              /* 50% = perfect circle */
+  background: var(--accent);
+  display: grid; place-items: center;  /* centres the letter */
+  font-size: 2.5rem; font-weight: 700;
+}
+
+h1 { font-size: 2rem; }
+.tagline { color: var(--muted); margin-top: .5rem; }
+
+/* max-width stops lines getting too long on big screens */
+main { max-width: 680px; margin: 0 auto; padding: 0 1rem; }
+
+.card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.card h2 { font-size: 1.2rem; margin-bottom: .75rem; color: var(--accent); }
+
+.projects { list-style: none; }
+.projects li { padding: .4rem 0; }
+
+/* flex puts the buttons in a row; wrap moves them to a new line on phones */
+.social { display: flex; flex-wrap: wrap; gap: .75rem; }
+.social a {
+  color: var(--text);
+  text-decoration: none;
+  border: 1px solid var(--muted);
+  padding: .5rem 1rem;
+  border-radius: 999px;            /* pill shape */
+  transition: background .2s;      /* smooth colour change */
+}
+.social a:hover { background: var(--accent); border-color: var(--accent); }
+
+footer { text-align: center; color: var(--muted); padding: 2rem 1rem; font-size: .9rem; }
