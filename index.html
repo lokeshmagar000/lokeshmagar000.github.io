@@ -1,59 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <!-- meta charset: lets the page show every letter correctly (also Nepali) -->
   <meta charset="UTF-8">
-  <!-- viewport: makes the site fit nicely on phones -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lok Bahadur Roka Magar</title>
-  <meta name="description" content="Personal website of Lok Bahadur Roka Magar, app creator from Nepal.">
-  <!-- link: connects our design file (CSS) to this page -->
-  <link rel="stylesheet" href="style.css">
+
+  <!-- SEO: what Google shows -->
+  <title>Lok Bahadur Roka Magar — App Developer & AI Content Creator</title>
+  <meta name="description" content="Portfolio of Lok Bahadur Roka Magar, app developer and AI content creator from Nepal. RokaPlayer, RokaConnect and Namaste Facts.">
+  <meta name="theme-color" content="#07090f">
+
+  <!-- Open Graph: the preview when someone shares the link -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Lok Bahadur Roka Magar">
+  <meta property="og:description" content="App Developer & AI Content Creator from Nepal">
+  <meta property="og:image" content="https://lokeshmagar000.github.io/images/namaste-facts/logo.webp">
+
+  <!-- Set the theme BEFORE the page draws, so it never flashes the wrong colour -->
+  <script>
+    try {
+      var saved = localStorage.getItem("theme");
+      var theme = saved || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      document.documentElement.dataset.theme = theme;
+    } catch (e) {}
+  </script>
+
+  <!-- Fonts: Inter (English) + Noto Sans Devanagari (Nepali) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- HEADER: the top part with your name -->
-  <header class="hero">
-    <div class="avatar">L</div>
-    <h1>Lok Bahadur Roka Magar</h1>
-    <p class="tagline">Creator of PRISM from Nepal 🇳🇵</p>
+  <!-- ===== MENU BAR ===== -->
+  <header class="nav" id="nav">
+    <a href="#home" class="brand" aria-label="Home">L<span>.</span></a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" data-i18n="navHome">Home</a>
+      <a href="#projects" data-i18n="navProjects">Projects</a>
+      <a href="#about" data-i18n="navAbout">About</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+    </nav>
+
+    <div class="nav-tools">
+      <!-- Language switch: EN | ने -->
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="en" aria-pressed="true">EN</button>
+        <button data-lang="ne" aria-pressed="false">ने</button>
+      </div>
+      <!-- Theme switch: sun / moon -->
+      <button class="icon-btn" id="themeBtn" data-i18n-aria="themeLabel" aria-label="Switch light / dark mode">
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      </button>
+      <!-- Phone menu button (hamburger) -->
+      <button class="icon-btn menu-btn" id="menuBtn" data-i18n-aria="menuLabel" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span>
+      </button>
+    </div>
   </header>
 
   <main>
-    <!-- ABOUT: you will write your own bio here -->
-    <section class="card">
-      <h2>About me</h2>
-      <p>
-        Write your bio here. Example: who you are, where you are from,
-        and what you love to build.
-      </p>
+    <!-- ===== HERO (top section with 3D) ===== -->
+    <section class="hero" id="home">
+      <canvas id="hero3d" aria-hidden="true"></canvas>
+      <div class="hero-fallback" aria-hidden="true"></div>
+
+      <div class="hero-content reveal">
+        <div class="avatar" id="avatar"><span>L</span></div>
+        <h1 data-i18n="name">Lok Bahadur Roka Magar</h1>
+        <p class="tagline" data-i18n="tagline">App Developer & AI Content Creator from Nepal</p>
+        <p class="intro" data-i18n="intro"></p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn primary" data-i18n="ctaProjects">See my projects</a>
+          <a href="#contact" class="btn ghost" data-i18n="ctaContact">Contact me</a>
+        </div>
+      </div>
+      <a href="#projects" class="scroll-hint" aria-hidden="true" tabindex="-1"><span></span></a>
     </section>
 
-    <!-- PROJECTS: a list of your apps -->
-    <section class="card">
-      <h2>My projects</h2>
-      <ul class="projects">
-        <li><strong>PRISM Camera</strong> — a pro camera app for Android</li>
-        <li><strong>HimalNews</strong> — a premium Nepali news app</li>
-      </ul>
+    <!-- ===== PROJECTS (filled in by js/main.js from content.js) ===== -->
+    <section class="section" id="projects">
+      <div class="section-head reveal">
+        <h2 data-i18n="projectsTitle">Projects</h2>
+        <p data-i18n="projectsSub"></p>
+      </div>
+      <div class="projects" id="projectList"></div>
     </section>
 
-    <!-- SOCIAL: buttons that open your profiles in a new tab -->
-    <section class="card">
-      <h2>Find me online</h2>
-      <div class="social">
-        <a href="https://www.facebook.com/iamlokeshmagar" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://www.instagram.com/iamlokeshmagar" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.tiktok.com/@lokeshmagar000" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://github.com/lokeshmagar000" target="_blank" rel="noopener">GitHub</a>
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+      <div class="about glass reveal">
+        <h2 data-i18n="aboutTitle">About me</h2>
+        <p class="bio" data-i18n="bio"></p>
+        <p class="from" data-i18n="aboutFrom"></p>
+        <h3 data-i18n="findMe">Find me online</h3>
+        <div class="social" id="socialLinks"></div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section" id="contact">
+      <div class="contact glass reveal">
+        <h2 data-i18n="contactTitle">Let's talk</h2>
+        <p data-i18n="contactSub"></p>
+        <form id="contactForm" novalidate>
+          <label><span data-i18n="fName">Name</span>
+            <input type="text" name="name" required maxlength="100" autocomplete="name">
+          </label>
+          <label><span data-i18n="fEmail">Email</span>
+            <input type="email" name="email" required maxlength="200" autocomplete="email">
+          </label>
+          <label><span data-i18n="fMessage">Message</span>
+            <textarea name="message" rows="5" required maxlength="3000"></textarea>
+          </label>
+          <!-- Honeypot: hidden from people. Bots fill it in, so we know they are bots. -->
+          <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit" class="btn primary" data-i18n="fSend">Send message</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
       </div>
     </section>
   </main>
 
-  <footer>
-    <!-- &copy; makes the © symbol -->
-    <p>&copy; 2026 Lok Bahadur Roka Magar</p>
-  </footer>
+  <footer class="footer"><p data-i18n="footer">© 2026 Lok Bahadur Roka Magar</p></footer>
 
+  <!-- Big picture viewer for screenshots (lightbox) -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="icon-btn lb-close" id="lbClose" data-i18n-aria="closeLabel" aria-label="Close">✕</button>
+    <img id="lbImg" alt="">
+  </div>
+
+  <noscript><p class="noscript">Please turn on JavaScript to see all of this site.</p></noscript>
+
+  <!-- type="module" lets our JS files import each other -->
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
