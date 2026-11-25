@@ -236,6 +236,8 @@ html[lang="ne"] h2 { letter-spacing: 0; }
   font-size: .72rem; font-weight: 600; border-radius: 999px;
   color: var(--gold); border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent);
 }
+.badge.live { color: #2fbf71; border-color: color-mix(in srgb, #2fbf71 50%, transparent); }
+.badge.live::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: #2fbf71; vertical-align: middle; }
 .p-desc { color: var(--muted); }
 .p-features { list-style: none; margin: 20px 0 24px; display: grid; gap: 9px; }
 .p-features li { display: flex; gap: 10px; align-items: flex-start; }
@@ -266,13 +268,15 @@ a.p-link:hover { background: var(--accent); color: #fff; transform: translateY(-
 /* screenshot gallery: swipe sideways on phone */
 .gallery {
   display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
-  padding-bottom: 8px; align-self: center; scrollbar-width: thin;
+  padding-bottom: 8px; align-self: center; scrollbar-width: thin; min-width: 0;
 }
 .gallery button, .shot-empty {
   flex: none; width: 200px; aspect-ratio: 9 / 19; border-radius: 20px; overflow: hidden;
   scroll-snap-align: start; border: 1px solid var(--line);
 }
-.gallery button img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+/* real screenshots keep their own shape: phone = tall, Mac = wide */
+.gallery button { width: auto; height: 380px; aspect-ratio: auto; padding: 0; background: var(--bg-2); }
+.gallery button img { height: 100%; width: auto; max-width: none; transition: transform .5s var(--ease); }
 .gallery button:hover img { transform: scale(1.04); }
 .shot-empty {
   display: grid; place-items: center; text-align: center; padding: 16px;
@@ -298,6 +302,7 @@ a.p-link:hover { background: var(--accent); color: #fff; transform: translateY(-
 .social a:hover { background: var(--text); color: var(--bg); transform: translateY(-2px); }
 
 .contact > p { color: var(--muted); margin-top: 6px; }
+.contact-email { margin-top: 24px; }
 form { margin-top: 26px; display: grid; gap: 16px; }
 label span { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 6px; }
 input, textarea {
@@ -337,7 +342,8 @@ form .btn[disabled] { opacity: .6; cursor: wait; }
 /* ---------- PHONE & TABLET ---------- */
 @media (max-width: 860px) {
   .project { grid-template-columns: 1fr; padding: 26px; }
-  .gallery button, .shot-empty { width: 170px; }
+  .shot-empty { width: 170px; }
+  .gallery button { height: 320px; }
 }
 @media (max-width: 720px) {
   .menu-btn { display: grid; }

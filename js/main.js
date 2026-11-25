@@ -132,7 +132,7 @@ function renderProjects() {
         <div class="p-head">
           <div class="p-icon">${p.icon ? `<img src="${esc(p.icon)}" alt="" loading="lazy">` : esc(p.name[0])}</div>
           <div>
-            <h3>${esc(p.name)}${p.comingSoon ? `<span class="badge">${esc(t("comingSoon"))}</span>` : ""}</h3>
+            <h3>${esc(p.name)}${p.live ? `<span class="badge live">${esc(t("live"))}</span>` : p.comingSoon ? `<span class="badge">${esc(t("comingSoon"))}</span>` : ""}</h3>
             <p class="p-tagline">${esc(p.tagline[lang])}</p>
           </div>
         </div>
@@ -177,46 +177,12 @@ function observeReveals() {
   $$(".reveal:not(.visible)").forEach((el) => revealer.observe(el));
 }
 
-/* ---------- 7. CONTACT FORM (Formspree) ---------- */
-const form = $("#contactForm");
-const status = $("#formStatus");
-const setStatus = (msg, kind = "") => { status.textContent = msg; status.className = "form-status " + kind; };
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  if (form._gotcha.value) return;                       // a bot filled the trap
-
-  // simple checks: every field filled, email looks like an email
-  let ok = true;
-  ["name", "email", "message"].forEach((n) => {
-    const field = form[n];
-    const valid = field.value.trim() !== "" && field.checkValidity();
-    field.classList.toggle("invalid", !valid);
-    if (!valid) ok = false;
-  });
-  if (!ok) return setStatus(t("fInvalid"), "err");
-
-  const id = SITE.formspreeId;
-  if (!id || id === "YOUR_FORM_ID") return setStatus(t("fNotReady"), "err");
-
-  const btn = form.querySelector("button[type=submit]");
-  btn.disabled = true;
-  setStatus(t("fSending"));
-  try {
-    const res = await fetch(`https://formspree.io/f/${encodeURIComponent(id)}`, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: new FormData(form),
-    });
-    if (!res.ok) throw new Error(res.status);
-    form.reset();
-    setStatus(t("fSent"), "ok");
-  } catch {
-    setStatus(t("fError"), "err");
-  } finally {
-    btn.disabled = false;
-  }
-});
+/* ---------- 7. CONTACT EMAIL ---------- */
+const emailLink = $("#emailLink");
+if (emailLink && SITE.email) {
+  emailLink.href = "mailto:" + SITE.email;
+  emailLink.textContent = SITE.email;
+}
 
 /* ---------- START ---------- */
 applyLanguage();

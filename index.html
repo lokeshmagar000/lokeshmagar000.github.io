@@ -106,21 +106,7 @@
       <div class="contact glass reveal">
         <h2 data-i18n="contactTitle">Let's talk</h2>
         <p data-i18n="contactSub"></p>
-        <form id="contactForm" novalidate>
-          <label><span data-i18n="fName">Name</span>
-            <input type="text" name="name" required maxlength="100" autocomplete="name">
-          </label>
-          <label><span data-i18n="fEmail">Email</span>
-            <input type="email" name="email" required maxlength="200" autocomplete="email">
-          </label>
-          <label><span data-i18n="fMessage">Message</span>
-            <textarea name="message" rows="5" required maxlength="3000"></textarea>
-          </label>
-          <!-- Honeypot: hidden from people. Bots fill it in, so we know they are bots. -->
-          <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button type="submit" class="btn primary" data-i18n="fSend">Send message</button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        </form>
+        <a class="btn primary contact-email" id="emailLink" href="mailto:contact@lokmagar.com.np">contact@lokmagar.com.np</a>
       </div>
     </section>
   </main>
