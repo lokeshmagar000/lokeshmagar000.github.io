@@ -11,7 +11,7 @@ export const SITE = {
   // Your profile photo. Put the file in images/profile/ and
   // write its path here, e.g. "images/profile/profile.jpg".
   // While it is null, a round "L" badge is shown instead.
-  photo: "images/profile/profile.jpg",
+  photo: "images/profile/profile.jpg?v=2",
 
   social: [
     { name: "Facebook",  url: "https://www.facebook.com/iamlokeshmagar" },
