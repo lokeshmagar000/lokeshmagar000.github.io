@@ -5,7 +5,7 @@
    6. scroll animations   7. contact form   8. starts the 3D
    ========================================================== */
 
-import { SITE, TEXT, PROJECTS } from "./content.js?v=20261126b";
+import { SITE, TEXT, PROJECTS } from "./content.js?v=20261126c";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -191,6 +191,6 @@ observeReveals();
 /* ---------- 8. 3D HERO ----------
    Loaded separately so the page shows fast. If 3D cannot run,
    the soft glow (.hero-fallback) stays instead. */
-import("./hero3d.min.js?v=20261126b")
+import("./hero3d.min.js?v=20261126c")
   .then((m) => m.startHero($("#hero3d")))
   .catch(() => { $("#hero3d").remove(); });
